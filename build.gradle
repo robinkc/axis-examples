@@ -1,0 +1,44 @@
+group 'in.kcrob'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply from : 'common.gradle'
+
+sourceCompatibility = 1.8
+
+buildscript {
+   repositories {
+       jcenter()
+       maven {
+           url "https://plugins.gradle.org/m2/"
+       }
+   }
+   dependencies {
+       classpath "com.github.jengelman.gradle.plugins:shadow:2.0.1"
+   }
+}
+
+repositories {
+   mavenCentral()
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'application'
+
+//mainClassName = 'in.kcrob.tardhttp.RunBenchmarkTask' //used for running fatjars
+
+
+dependencies {
+   compile fileTree(dir: 'libs', include: ['*.jar'])
+   compile group: 'org.scala-lang', name: 'scala-library', version: '2.11.11'
+   testCompile 'org.scala-lang:scala-library:2.11.11'
+   testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: '2.2.2'
+   testCompile group: 'junit', name: 'junit', version: '4.12'
+
+//Log4J2 //Find latest version at http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.apache.logging.log4j%22%20AND%20a%3A%22log4j-api%22 AND http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.apache.logging.log4j%22%20AND%20a%3A%22log4j-core%22
+compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.2'
+compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
+
+}
+
